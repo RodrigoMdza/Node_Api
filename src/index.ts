@@ -1,5 +1,9 @@
 import cors from "cors";
 import customerRouter from "./routes/customer.routes";
+import orderRoute from "./routes/order.routes";
+import addressRouter from "./routes/address.routes";
+import categoryRouter from "./routes/category.routes";
+import productRouter from "./routes/product.routes";
 import express from "express";
 import { AppDataSource } from "./data-source";
 
@@ -20,6 +24,10 @@ app.use(
 );
 
 app.use("/api", customerRouter);
+app.use("/api", orderRoute);
+app.use("/api", addressRouter);
+app.use("/api", categoryRouter);
+app.use("/api", productRouter);
 
 app.use((req, res) => {
   res.sendStatus(404);

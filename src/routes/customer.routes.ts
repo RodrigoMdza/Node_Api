@@ -5,7 +5,21 @@ import { Customer } from "../entity/Customer";
 const customerRouter = express.Router();
 
 customerRouter.get("/customer", async (req, res) => {
-  const data = await AppDataSource.getRepository(Customer).findAndCount();
+  const data = await AppDataSource.getRepository(Customer).findAndCount({
+    relations: ["orders"]
+  }
+  );
+  res.send(data);
+});
+
+customerRouter.get("/customers/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  const data = await AppDataSource.getRepository(Customer).findOne({
+    where: {
+      id
+    },
+    relations: ["orders"]
+  });
   res.send(data);
 });
 

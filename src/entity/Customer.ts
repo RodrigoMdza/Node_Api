@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { Address } from "./Address"
+import { Order } from "./Order"
 
 @Entity()
 export class Customer {
@@ -14,5 +16,11 @@ export class Customer {
 
     @Column()
     age: number
+
+    @OneToMany(type => Order, order => order.customer)
+    orders: Order[];
+
+    @OneToMany(type => Address, address => address.customer)
+    address: Address[];
 
 }
